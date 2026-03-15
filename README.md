@@ -57,6 +57,15 @@ npm run dev -- --webpack
 ## Start Path Guide
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#0b1020',
+  'primaryColor': '#1f2937',
+  'primaryTextColor': '#f9fafb',
+  'primaryBorderColor': '#38bdf8',
+  'lineColor': '#38bdf8',
+  'secondaryColor': '#0f172a',
+  'tertiaryColor': '#111827'
+}}}%%
 flowchart TD
   A[Open Repository] --> B{Your Goal}
   B -->|Run Demo| C[Start Backend and Frontend]
@@ -67,11 +76,29 @@ flowchart TD
   D --> H[Package Artifacts + Update Shared State]
   E --> H
   H --> G
+
+  classDef decision fill:#fef08a,stroke:#eab308,color:#1f2937,stroke-width:2px;
+  classDef action fill:#22d3ee,stroke:#0891b2,color:#082f49,stroke-width:2px;
+  classDef deep fill:#a78bfa,stroke:#7c3aed,color:#1e1b4b,stroke-width:2px;
+  classDef result fill:#34d399,stroke:#059669,color:#052e16,stroke-width:2px;
+  class A,C,D,E,F action;
+  class B decision;
+  class H deep;
+  class G result;
 ```
 
 ## System Architecture
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#0a0f1f',
+  'primaryColor': '#111827',
+  'primaryTextColor': '#f8fafc',
+  'primaryBorderColor': '#22d3ee',
+  'lineColor': '#38bdf8',
+  'clusterBkg': '#0f172a',
+  'clusterBorder': '#334155'
+}}}%%
 flowchart LR
   subgraph Data
     CSV[CSV Landmark Data]
@@ -104,11 +131,34 @@ flowchart LR
   API --> COMBO
   UI --> API
   API --> UI
+
+  classDef data fill:#0ea5e9,stroke:#0369a1,color:#082f49,stroke-width:2px;
+  classDef train fill:#c084fc,stroke:#7e22ce,color:#3b0764,stroke-width:2px;
+  classDef runtime fill:#34d399,stroke:#059669,color:#052e16,stroke-width:2px;
+  classDef state fill:#f97316,stroke:#c2410c,color:#431407,stroke-width:2px;
+  class CSV,WLASL data;
+  class RFTRAIN,PREP,LSTMTRAIN,PACKAGE train;
+  class UI,API,RF,LSTM,COMBO runtime;
+  class STATE state;
 ```
 
 ## Inference Runtime Workflow
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#0b1020',
+  'primaryColor': '#0f172a',
+  'primaryTextColor': '#e2e8f0',
+  'lineColor': '#22d3ee',
+  'actorBkg': '#1d4ed8',
+  'actorBorder': '#93c5fd',
+  'actorTextColor': '#eff6ff',
+  'signalColor': '#22d3ee',
+  'signalTextColor': '#e0f2fe',
+  'labelBoxBkgColor': '#111827',
+  'labelBoxBorderColor': '#334155',
+  'labelTextColor': '#f8fafc'
+}}}%%
 sequenceDiagram
   participant User
   participant Frontend
@@ -129,6 +179,15 @@ sequenceDiagram
 ## Static vs Dynamic Pipeline
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#090f1a',
+  'primaryColor': '#111827',
+  'primaryTextColor': '#f8fafc',
+  'primaryBorderColor': '#22d3ee',
+  'lineColor': '#38bdf8',
+  'clusterBkg': '#111827',
+  'clusterBorder': '#334155'
+}}}%%
 flowchart LR
   subgraph Static_Path
     S1[hand_alphabet_data.csv]
@@ -148,11 +207,25 @@ flowchart LR
 
   S1 --> S2 --> S3 --> S4
   D1 --> D2 --> D3 --> D4 --> D5 --> D6
+
+  classDef static fill:#06b6d4,stroke:#0e7490,color:#083344,stroke-width:2px;
+  classDef dynamic fill:#a78bfa,stroke:#7c3aed,color:#2e1065,stroke-width:2px;
+  classDef artifact fill:#f59e0b,stroke:#b45309,color:#451a03,stroke-width:2px;
+  class S1,S2,S3 static;
+  class D1,D2,D3,D5 dynamic;
+  class S4,D4,D6 artifact;
 ```
 
 ## Training Workflow Decision Tree
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#0b1120',
+  'primaryColor': '#111827',
+  'primaryTextColor': '#f9fafb',
+  'primaryBorderColor': '#f472b6',
+  'lineColor': '#22d3ee'
+}}}%%
 flowchart TD
   A[Need to Retrain] --> B{Where are you training?}
   B -->|Constrained device| C[Profile: pi_zero]
@@ -176,11 +249,27 @@ flowchart TD
   J --> M
   K --> M
   L --> M
+
+  classDef decision fill:#fde68a,stroke:#f59e0b,color:#422006,stroke-width:2px;
+  classDef profile fill:#f9a8d4,stroke:#db2777,color:#500724,stroke-width:2px;
+  classDef action fill:#67e8f9,stroke:#0891b2,color:#083344,stroke-width:2px;
+  classDef result fill:#86efac,stroke:#16a34a,color:#052e16,stroke-width:2px;
+  class A,B decision;
+  class C,D profile;
+  class E,F,G,H,I,J,K,L action;
+  class M result;
 ```
 
 ## Artifact Lifecycle
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#0a1222',
+  'primaryColor': '#111827',
+  'primaryTextColor': '#f8fafc',
+  'primaryBorderColor': '#22d3ee',
+  'lineColor': '#38bdf8'
+}}}%%
 flowchart LR
   A[Training Command or API Trigger] --> B[Create Model and Label Artifacts]
   B --> C[Publish Active Paths]
@@ -188,6 +277,13 @@ flowchart LR
   D --> E[Backend Artifact Resolver]
   E --> F[Runtime Inference]
   F --> G[Frontend Prediction UI]
+
+  classDef step fill:#67e8f9,stroke:#0891b2,color:#083344,stroke-width:2px;
+  classDef artifact fill:#fca5a5,stroke:#dc2626,color:#450a0a,stroke-width:2px;
+  classDef final fill:#86efac,stroke:#16a34a,color:#052e16,stroke-width:2px;
+  class A,B,C,E,F step;
+  class D artifact;
+  class G final;
 ```
 
 ## Run and Train Commands
@@ -262,6 +358,15 @@ python model_training_orchestrator.py
 ## Repository Workflow Map
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {
+  'background': '#0b1020',
+  'primaryColor': '#111827',
+  'primaryTextColor': '#f8fafc',
+  'primaryBorderColor': '#38bdf8',
+  'lineColor': '#22d3ee',
+  'clusterBkg': '#0f172a',
+  'clusterBorder': '#334155'
+}}}%%
 flowchart TD
   A[src/] --> A1[api_server.py]
   A --> A2[training_pipeline.py]
@@ -284,6 +389,15 @@ flowchart TD
   A2 --> C3
   C3 --> A1
   D --> A1
+
+  classDef source fill:#60a5fa,stroke:#1d4ed8,color:#172554,stroke-width:2px;
+  classDef data fill:#22d3ee,stroke:#0891b2,color:#083344,stroke-width:2px;
+  classDef model fill:#f59e0b,stroke:#b45309,color:#451a03,stroke-width:2px;
+  classDef front fill:#a78bfa,stroke:#7c3aed,color:#2e1065,stroke-width:2px;
+  class A,A1,A2,A3,A4,A5 source;
+  class B,B1,B2,B3 data;
+  class C,C1,C2,C3 model;
+  class D,D1,D2,D3 front;
 ```
 
 ## Troubleshooting
