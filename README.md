@@ -14,7 +14,7 @@ A full-stack hand sign recognition system built for practical experimentation an
 
 | Capability | What It Does | Primary Files |
 |---|---|---|
-| Live Inference | Captures camera frames and returns label + confidence in near real time | `frontend-react/components/ui/demo.tsx`, `src/api_server.py` |
+| Live Inference | Captures camera frames and returns label + confidence in near real time | `frontend/app/page.tsx`, `src/api_server.py` |
 | Static Model Path | Trains/serves Random Forest from landmark-style features | `src/random_forest_trainer.py`, `src/api_server.py` |
 | Dynamic Model Path | Trains/serves LSTM from fixed-length feature sequences | `src/wlasl_data_preprocessor.py`, `src/lstm_trainer.py` |
 | Combo Layer | Matches recent predictions to predefined gesture templates | `src/api_server.py` |
@@ -44,10 +44,12 @@ python -m uvicorn src.api_server:app --host 127.0.0.1 --port 8000 --reload
 ### 3. Start the Next.js frontend
 
 ```bash
-cd frontend-react
+cd frontend
 npm install
-npm run dev -- --webpack
+npm.cmd run dev
 ```
+
+If PowerShell blocks npm scripts, use `npm.cmd` instead of `npm`.
 
 ### 4. Open the app
 
@@ -295,8 +297,8 @@ flowchart LR
 python -m uvicorn src.api_server:app --host 127.0.0.1 --port 8000 --reload
 
 # Terminal 2
-cd frontend-react
-npm run dev -- --webpack
+cd frontend
+npm.cmd run dev
 ```
 
 ### Device-local trainer commands
@@ -382,7 +384,7 @@ flowchart TD
   C --> C2[class label files]
   C --> C3[shared_backend_state.json]
 
-  D[frontend-react/] --> D1[app/]
+  D[frontend/] --> D1[app/]
   D --> D2[components/]
   D --> D3[fonts and styling]
 
@@ -407,7 +409,7 @@ flowchart TD
 If script policy blocks npm, run via command shell:
 
 ```bash
-cmd /c "cd frontend-react & npm run dev -- --webpack"
+cmd /c "cd frontend && npm.cmd run dev"
 ```
 
 ### Backend starts but file uploads fail

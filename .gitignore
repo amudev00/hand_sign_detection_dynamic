@@ -55,6 +55,9 @@ node_modules/
 .next/
 out/
 .vercel/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
 
 # Local runtime outputs
 reports/
@@ -63,6 +66,7 @@ reports/
 models/*.pkl
 models/*.h5
 models/*.npy
+models/shared_backend_state.json
 
 # Large/local processed data artifacts
 data/X_data*.npy
@@ -71,5 +75,5 @@ data/wlasl_labels*.npy
 
 # Optional local dataset video dump
 data/videos/
-frontend-react
-frontend-react
+frontend-react/
+frontend-v2/
