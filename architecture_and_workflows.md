@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-This project is a complete hand sign recognition platform that combines:
+This project is  complete hand sign recognition platform that combines:
 
 - Static alphabet classification from hand landmarks using Random Forest.
 - Dynamic sign sequence classification from temporal feature sequences using LSTM.
